@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Html5Qrcode } from "html5-qrcode";
 import { version } from "../package.json";
 
-const APPS_SCRIPT_URL = import.meta.env.VITE_CLOUD_NAME
+const APPS_SCRIPT_URL = import.meta.env.VITE_APPS_SCRIPT_URL
 
 type ScannerState = "idle" | "scanning" | "error";
 type TipoEvento = "entrada" | "salida" | null;

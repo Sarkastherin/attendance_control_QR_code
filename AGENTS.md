@@ -17,7 +17,7 @@ No test framework configured. No typecheck script (use `npx tsc -b --noEmit` man
 
 ## Critical: env var mismatch
 
-`src/App.tsx:5` references `import.meta.env.VITE_CLOUD_NAME` but `.env` defines `VITE_APPS_SCRIPT_URL`. The variable name in code must match `.env`. This is a known discrepancy - verify which is correct before modifying.
+`src/App.tsx:5` references `import.meta.env.VITE_APPS_SCRIPT_URL` but `.env` defines `VITE_APPS_SCRIPT_URL`. The variable name in code must match `.env`. This is a known discrepancy - verify which is correct before modifying.
 
 ## Architecture
 
