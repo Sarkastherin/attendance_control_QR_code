@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { Html5Qrcode } from "html5-qrcode";
+import { version } from "../package.json";
 
-const APPS_SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycby-iJ9kVeL1reGj00-I7JmWthdJmMQyf0GGx6ANswuOgvARbOs2n2ZAMGMgRQBAwKjNzg/exec";
+const APPS_SCRIPT_URL = import.meta.env.VITE_CLOUD_NAME
 
 type ScannerState = "idle" | "scanning" | "error";
 type TipoEvento = "entrada" | "salida" | null;
@@ -86,7 +86,7 @@ function App() {
 
       await scanner.start(
         { facingMode: { exact: "user" } },
-        { fps: 10, qrbox: { width: 200, height: 200 }, aspectRatio: 1.0 },
+        { fps: 10, qrbox: { width: 250, height: 250 }, aspectRatio: 1.0 },
         async (decodedText) => {
           console.log("QR detectado:", decodedText);
           setScannedResult(decodedText);
@@ -116,8 +116,10 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-950 text-white flex flex-col items-center justify-center px-4">
-      <h1 className="text-2xl font-bold mb-6">Fichaje QR</h1>
+    <div className="min-h-screen bg-gray-950 text-white flex flex-col justify-around items-center px-10">
+      <h1 className="text-4xl font-bold tracking-tight" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+        Ficha<span style={{ fontFamily: "'Dancing Script', cursive" }} className="text-5xl text-yellow-500">Door</span>
+      </h1>
 
       <div className="w-full max-w-sm">
         <div
@@ -250,7 +252,20 @@ function App() {
           </div>
         )}
       </div>
-      <span className="mt-6 text-gray-600 text-xs">version 0.1.4</span>
+      <footer className="mt-8 text-center">
+        <p className="text-gray-600 text-xs">
+          Hecho por{" "}
+          <a
+            href="https://linktr.ee/kathe.systems"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gray-500 hover:text-gray-300 underline underline-offset-2 transition-colors"
+          >
+            Kathe Guerrero
+          </a>
+        </p>
+        <p className="text-gray-700 text-[10px] mt-1">v{version}</p>
+      </footer>
     </div>
   );
 }
