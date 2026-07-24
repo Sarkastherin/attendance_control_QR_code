@@ -204,11 +204,37 @@ Reiniciar el servidor de desarrollo (`npm run dev`) para que tome los cambios.
 
 Cada operario necesita un código QR con su `idEmpleado`. Por ejemplo, para el operario `OP-014`, el QR debe contener exactamente el texto `OP-014`.
 
-Se pueden generar con cualquier herramienta gratuita:
+### Generar QR con la API de Google
+
+Se puede generar un QR dinámico usando la API pública de QR Server. La URL es:
+
+```
+https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=OP-014
+```
+
+Reemplazar `OP-014` con el ID de cada operario.
+
+### Mostrar el QR en la hoja de cálculo
+
+En la hoja `Operarios`, se puede agregar una columna `Codigo_QR` con esta fórmula para visualizar el QR directamente en la celda:
+
+```
+=IMAGE("https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" & A2)
+```
+
+Donde `A2` es la celda que contiene el `idEmpleado`. Esto genera el QR automáticamente para cada operario.
+
+### Otras herramientas gratuitas
+
 - [QR Code Generator](https://www.qrcode-generator.de/)
 - [QR Code Monkey](https://www.qrcode-monkey.com/)
 
-Imprimir las credenciales en material durable para uso diario en planta.
+### Recomendaciones
+
+- Imprimir las credenciales en material durable (laminado o plastificado)
+- Tamaño mínimo recomendado: 3cm x 3cm
+- Usar alto contraste (fondo blanco, código negro)
+- Probar el escaneo antes de imprimir en masa
 
 ---
 
@@ -233,11 +259,22 @@ Imprimir las credenciales en material durable para uso diario en planta.
 ## Comandos disponibles
 
 ```bash
-npm run dev       # Servidor de desarrollo con HTTPS
-npm run build     # Build de producción (dist/)
-npm run lint      # Verificar código con ESLint
-npm run preview   # Preview del build de producción
+npm run dev         # Servidor de desarrollo (solo local)
+npm run dev:host    # Servidor accesible desde la red local
+npm run build       # Build de producción (dist/)
+npm run lint        # Verificar código con ESLint
+npm run preview     # Preview del build de producción
 ```
+
+---
+
+## Probar en tablet o celular
+
+1. Ejecutar `npm run dev:host`
+2. Copiar la URL que aparece en `Network:` (ej: `https://192.168.100.4:5173`)
+3. Abrir esa URL en el navegador del dispositivo
+4. Aceptar el certificado de seguridad (es auto-firmado)
+5. Listo para probar el escaneo
 
 ---
 
